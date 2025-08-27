@@ -135,9 +135,9 @@ print(f"Predicted for X = 120: {y_new_pred:.8f}")
 
 ### Dataset Information
 Include screenshot of the generated data
-```
+
 <img width="753" height="580" alt="Screenshot 2025-08-27 154646" src="https://github.com/user-attachments/assets/d1615a44-d14d-4630-8c7d-63185f4480e2" />
-```
+
 
 ### OUTPUT
 Training Loss Vs Iteration Plot
