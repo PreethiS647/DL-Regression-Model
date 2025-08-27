@@ -67,12 +67,51 @@ torch.manual_seed(59)
 ```
 <img width="753" height="580" alt="image" src="https://github.com/user-attachments/assets/7ff3f4b5-9d41-49bf-a70f-5406fbc08983" />
 
-<img width="753" height="580" alt="Screenshot 2025-08-27 154646" src="https://github.com/user-attachments/assets/f84cf30f-caf9-4b02-b902-848f6a8c53f7" />
+
+
+class Model(nn.Module):
+    def __init__(self, in_features, out_features):
+        super().__init__()
+        self.linear = nn.Linear(in_features, out_features)
+
+    def forward(self, x):
+        y_pred = self.linear(x)
+        return y_pred
+        
+torch.manual_seed(59)
+model = Model(1, 1)
+print('Weight:', model.linear.weight.item())
+print('Bias:  ', model.linear.bias.item())
+
+# Initialize the Model, Loss Function, and Optimizer
+
+loss_function = nn.MSELoss()  # Mean Squared Error (MSE) loss
+
+optimizer = torch.optim.SGD(model.parameters(), lr=0.0001)  # Stochastic Gradient Descent
+
+epochs = 50  # Number of training iterations
+losses = []  # List to store loss values
+
+for epoch in range(1, epochs + 1):  # Start from 1 to 50
+    optimizer.zero_grad()  # Clear previous gradients
+    y_pred = model(X)  # Forward pass
+    loss = loss_function(y_pred, y)  # Compute loss
+    losses.append(loss.item())  # Store loss value
+    
+    loss.backward()  # Compute gradients
+    optimizer.step()  # Update weights
+
+    # Print loss, weight, and bias for EVERY epoch (1 to 50)
+    print(f'epoch: {epoch:2}  loss: {loss.item():10.8f}  '
+          f'weight: {model.linear.weight.item():10.8f}  '
+          f'bias: {model.linear.bias.item():10.8f}')
+
+
 
 
 # Initialize the Model, Loss Function, and Optimizer
 
-```
+
 
 ### Dataset Information
 Include screenshot of the generated data
@@ -87,4 +126,4 @@ Include your sample input and output here
 
 ## RESULT
 Thus, a neural network regression model was successfully developed and trained using PyTorch.
-```
+
