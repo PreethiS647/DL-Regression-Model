@@ -64,9 +64,6 @@ plt.ylabel('y')
 plt.title('Generated Data for Linear Regression')
 plt.show()
 torch.manual_seed(59)
-```
-<img width="753" height="580" alt="image" src="https://github.com/user-attachments/assets/7ff3f4b5-9d41-49bf-a70f-5406fbc08983" />
-
 
 
 class Model(nn.Module):
@@ -77,14 +74,15 @@ class Model(nn.Module):
     def forward(self, x):
         y_pred = self.linear(x)
         return y_pred
-        
+
 torch.manual_seed(59)
 model = Model(1, 1)
 print('Weight:', model.linear.weight.item())
 print('Bias:  ', model.linear.bias.item())
 
+```
 # Initialize the Model, Loss Function, and Optimizer
-
+```
 loss_function = nn.MSELoss()  # Mean Squared Error (MSE) loss
 
 optimizer = torch.optim.SGD(model.parameters(), lr=0.0001)  # Stochastic Gradient Descent
@@ -106,24 +104,58 @@ for epoch in range(1, epochs + 1):  # Start from 1 to 50
           f'weight: {model.linear.weight.item():10.8f}  '
           f'bias: {model.linear.bias.item():10.8f}')
 
+# Automatically determine x-range
+x1 = torch.tensor([X.min().item(), X.max().item()])
+
+# Extract model parameters
+w1, b1 = model.linear.weight.item(), model.linear.bias.item()
+
+# Compute y1 (predicted values)
+y1 = x1 * w1 + b1
 
 
+# Print weight, bias, and x/y values
+print(f'Final Weight: {w1:.8f}, Final Bias: {b1:.8f}')
+print(f'X range: {x1.numpy()}')
+print(f'Predicted Y values: {y1.numpy()}')
 
-# Initialize the Model, Loss Function, and Optimizer
+plt.scatter(X.numpy(), y.numpy(), label="Original Data")
+plt.plot(x1.numpy(), y1.numpy(), 'r', label="Best-Fit Line")
+plt.xlabel('x')
+plt.ylabel('y')
+plt.title('Trained Model: Best-Fit Line')
+plt.legend()
+plt.show()
 
 
+x_new = torch.tensor([120.0])
+y_new_pred = model(x_new).item()
+print(f"Predicted for X = 120: {y_new_pred:.8f}")
+```
 
 ### Dataset Information
 Include screenshot of the generated data
+```
+<img width="753" height="580" alt="Screenshot 2025-08-27 154646" src="https://github.com/user-attachments/assets/d1615a44-d14d-4630-8c7d-63185f4480e2" />
+```
 
 ### OUTPUT
 Training Loss Vs Iteration Plot
+
+<img width="734" height="563" alt="Screenshot 2025-08-27 155322" src="https://github.com/user-attachments/assets/c6068d17-8f60-405a-8569-1c9037ce5610" />
+
 Best Fit line plot
-Include your plot here
+
+<img width="720" height="576" alt="image" src="https://github.com/user-attachments/assets/9d540b21-7b8f-4bdf-a6d1-8d2f6c8d4344" />
+
+
 
 ### New Sample Data Prediction
 Include your sample input and output here
 
+<img width="495" height="98" alt="Screenshot 2025-08-27 160653" src="https://github.com/user-attachments/assets/f7d8bf8b-4dc8-4553-b76f-27f400e6d0fd" />
+
+
 ## RESULT
 Thus, a neural network regression model was successfully developed and trained using PyTorch.
-
+```
