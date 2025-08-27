@@ -40,16 +40,34 @@ Use the trained model to predict  for a new input value .
 
 ## PROGRAM
 
-### Name:
+### Name:PREETHI S
 
-### Register Number:
+### Register Number: 212223230157
 
-```python
-class Model(nn.Module):
-    def __init__(self, in_features, out_features):
-        super().__init__()
-        #Include your code here
+```
+import torch
+import torch.nn as nn  # Neural network module
+import numpy as np
+import matplotlib.pyplot as plt  # For plotting
+%matplotlib inline
 
+X = torch.linspace(1,70,70).reshape(-1,1)
+torch.manual_seed(71) 
+e = torch.randint(-8,9,(70,1),dtype=torch.float)
+print(e.sum())
+y = 2*X + 1 + e
+print(y.shape)
+
+plt.scatter(X.numpy(), y.numpy(),color='red')  # Scatter plot of data points
+plt.xlabel('x')
+plt.ylabel('y')
+plt.title('Generated Data for Linear Regression')
+plt.show()
+torch.manual_seed(59)
+```
+<img width="753" height="580" alt="image" src="https://github.com/user-attachments/assets/7ff3f4b5-9d41-49bf-a70f-5406fbc08983" />
+
+<img width="753" height="580" alt="Screenshot 2025-08-27 154646" src="https://github.com/user-attachments/assets/f84cf30f-caf9-4b02-b902-848f6a8c53f7" />
 
 
 # Initialize the Model, Loss Function, and Optimizer
@@ -69,3 +87,4 @@ Include your sample input and output here
 
 ## RESULT
 Thus, a neural network regression model was successfully developed and trained using PyTorch.
+```
